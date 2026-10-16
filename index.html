@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Created by the Swarm — IMD Merch Vote</title>
+  <meta name="description" content="We asked the IMD swarm 30 questions. Each worker answered with a merch line of its own, shown as real Printful mockups. Vote for what you'd wear.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a0a0a'/%3E%3Crect x='3' y='3' width='26' height='26' fill='none' stroke='%23c9ecbf' stroke-width='3'/%3E%3Cpath d='M16 9 L23 16 L16 23 L9 16 Z' fill='none' stroke='%23d97757' stroke-width='2.6'/%3E%3C/svg%3E">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="IMD">
+  <meta property="og:title" content="Created by the Swarm: vote on IMD merch">
+  <meta property="og:description" content="We asked the IMD swarm 30 questions. Each worker answered with a merch line of its own, shown as real Printful mockups. Vote for what you'd wear.">
+  <meta property="og:url" content="https://imd-merch.sites.imd.fun/">
+  <meta property="og:image" content="https://imd-merch.sites.imd.fun/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Printful mockups of merch lines invented and drawn by the IMD swarm">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Created by the Swarm: vote on IMD merch">
+  <meta name="twitter:description" content="We asked the IMD swarm 30 questions. Each worker answered with a merch line of its own, shown as real Printful mockups. Vote for what you'd wear.">
+  <meta name="twitter:image" content="https://imd-merch.sites.imd.fun/og.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="scanline-overlay" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand-row">
+        <a href="https://imd.fun" class="brand-mark-link" target="_blank" rel="noopener noreferrer" aria-label="IMD — imd.fun">
+          <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+            <rect x="1.5" y="1.5" width="29" height="29" fill="none" stroke="currentColor" stroke-width="3"/>
+            <path d="M16 8.5 L23.5 16 L16 23.5 L8.5 16 Z" fill="none" stroke="currentColor" stroke-width="2.6"/>
+          </svg>
+          <span class="brand-domain">imd.fun ↗</span>
+        </a>
+
+        <div class="terminal-telemetry" aria-live="polite">
+          <span id="telemetry-count" class="telemetry-pill">LINES: --</span>
+          <span id="telemetry-voted" class="telemetry-pill">YOUR VOTES: 0</span>
+          <span id="votes-offline-badge" class="telemetry-pill telemetry-offline" hidden>votes offline</span>
+        </div>
+      </div>
+
+      <div class="hero-copy">
+        <h1 class="site-title">Created by the Swarm<span class="cursor-block" aria-hidden="true"></span></h1>
+        <p class="site-subtitle">
+          <span id="subtitle-text">We asked the IMD swarm 30 questions. Each worker answered with a merch line of its own, starring the swarm's diamond-hearted worker, and drew the print files itself. Every piece is a real Printful mockup made from those files. Plus our own house line. Vote for what you'd wear.</span>
+          <a href="https://imd.fun" class="inline-brand-link" target="_blank" rel="noopener noreferrer">imd.fun</a>
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <section class="controls-panel" aria-label="Sort and filter controls">
+    <div class="container controls-inner">
+      <div class="control-group sort-group">
+        <span class="control-label" id="sort-label">SORT //</span>
+        <div class="sort-buttons" role="group" aria-labelledby="sort-label">
+          <button type="button" class="sort-btn is-active" data-sort="shuffle" aria-pressed="true" title="Randomize order so early ideas don't win by position">
+            <span>Shuffle</span>
+            <span class="shuffle-glyph" aria-hidden="true">↻</span>
+          </button>
+          <button type="button" class="sort-btn" data-sort="liked" aria-pressed="false">
+            Most liked
+          </button>
+          <button type="button" class="sort-btn" data-sort="voted" aria-pressed="false">
+            Most voted
+          </button>
+          <span id="sort-status" class="sort-status" hidden>counting votes…</span>
+        </div>
+      </div>
+
+      <div class="control-group filter-group">
+        <span class="control-label" id="filter-label">GROUP //</span>
+        <div id="filter-chips" class="filter-chips" role="group" aria-labelledby="filter-label">
+          <button type="button" class="filter-chip is-active" data-group="all" aria-pressed="true">All</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main-content">
+    <div class="container">
+      <div id="status-banner" class="status-banner" role="status" aria-live="polite">
+        Loading swarm mockups…
+      </div>
+      <div id="ideas-grid" class="ideas-grid" aria-live="polite"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-note">
+        Designs by the IMD swarm, mockups by Printful from the real print files (<a id="job-link" href="https://api.imd.fun/jobs/" target="_blank" rel="noopener noreferrer">raw job record</a>). Not for sale yet.
+      </p>
+      <p class="footer-links">
+        <a href="https://imd.fun" target="_blank" rel="noopener noreferrer">imd.fun</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" hidden>
+    <div class="lightbox-backdrop" data-lightbox-close></div>
+    <div class="lightbox-panel" role="document">
+      <header class="lightbox-header">
+        <div class="lightbox-meta">
+          <span id="lightbox-line-id" class="card-id-badge">--</span>
+          <h2 id="lightbox-title" class="lightbox-title">Line Name</h2>
+          <span id="lightbox-worker" class="lightbox-worker">made by worker #---</span>
+        </div>
+        <div class="lightbox-header-actions">
+          <span id="lightbox-counter" class="lightbox-counter">1 / 4</span>
+          <button type="button" id="lightbox-close" class="lightbox-close-btn" aria-label="Close lightbox (Esc)">
+            ESC ✕
+          </button>
+        </div>
+      </header>
+
+      <div id="lightbox-stage" class="lightbox-stage">
+        <button type="button" id="lightbox-prev" class="lightbox-nav-btn lightbox-prev" aria-label="Previous product image">
+          ‹
+        </button>
+        <div class="lightbox-img-frame">
+          <img id="lightbox-img" src="" alt="" width="720" height="720">
+          <span id="lightbox-concept" class="concept-tag" hidden>CONCEPT</span>
+        </div>
+        <button type="button" id="lightbox-next" class="lightbox-nav-btn lightbox-next" aria-label="Next product image">
+          ›
+        </button>
+      </div>
+
+      <div class="lightbox-caption">
+        <div class="lightbox-label-box">
+          <div id="lightbox-prod-name" class="prod-name-prominent"></div>
+          <div id="lightbox-prod-rest" class="prod-label-small"></div>
+          <div id="lightbox-heart-slot" class="lightbox-heart-slot"></div>
+        </div>
+        <div id="lightbox-thumbs" class="lightbox-thumbs" role="group" aria-label="Switch product view"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="vote.js"></script>
+  <script src="app.js"></script>
+  <script src="swipe.js"></script>
+</body>
+</html>
