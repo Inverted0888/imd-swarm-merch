@@ -498,13 +498,14 @@
 
     // The question is what made the line: label it plainly so visitors see the cause, not just the result.
     const questionEl = document.createElement('div');
+    const ours = idea.house && !idea.fromSwarm;
     questionEl.className = `card-prompt${idea.house ? ' is-house' : ''}`;
     const promptLabel = document.createElement('span');
     promptLabel.className = 'prompt-label';
-    promptLabel.textContent = idea.house ? 'house line' : 'we asked the swarm';
+    promptLabel.textContent = idea.tag || (idea.house ? 'house line' : 'we asked the swarm');
     const promptText = document.createElement('p');
     promptText.className = 'card-question';
-    promptText.textContent = idea.house ? idea.question : `\u201c${idea.question}\u201d`;
+    promptText.textContent = ours ? idea.question : `\u201c${idea.question}\u201d`;
     questionEl.appendChild(promptLabel);
     questionEl.appendChild(promptText);
 
@@ -655,7 +656,7 @@
 
     const answerLabel = document.createElement('span');
     answerLabel.className = 'prompt-label';
-    answerLabel.textContent = idea.house ? 'the piece' : 'the swarm answered';
+    answerLabel.textContent = ours ? 'the piece' : 'the swarm answered';
     answerBlock.appendChild(answerLabel);
 
     const answerP = document.createElement('p');
@@ -1152,6 +1153,8 @@
           seat: cleanText(item.seat),
           credit: cleanText(item.credit || ''),
           house: !!item.house,
+          tag: cleanText(item.tag || ''), // a yardstick from an earlier round
+          fromSwarm: !!item.fromSwarm,
           products
         };
       });

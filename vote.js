@@ -5,7 +5,7 @@
 (function (global) {
   'use strict';
 
-  const NAMESPACE = 'imd-swarm-merch-r3';
+  const NAMESPACE = 'imd-swarm-merch-r4';
   const API_BASE = 'https://abacus.jasoncameron.dev';
   const CONCURRENCY_LIMIT = 6;
   const REQUEST_TIMEOUT_MS = 6500;
